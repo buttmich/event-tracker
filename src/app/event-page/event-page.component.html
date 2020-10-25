@@ -1,0 +1,32 @@
+<div *ngIf="loading; else loading" cdkDropListGroup>
+
+    <div *ngFor="let category of categories">
+        <mat-card class="category-card">
+            <mat-card-header _ngcontent-c22="" class="mat-card-header" [style.background-color]="'#' + category.color">                
+                <mat-card-title style="padding-top:10px">
+                    <mat-icon>{{icon}}</mat-icon>
+                    {{category.name}}
+                </mat-card-title>
+                <mat-card-subtitle>
+                    {{category.description}}
+                </mat-card-subtitle>
+            </mat-card-header>
+
+            <mat-card-content class="event-container" cdkDropList [cdkDropListData]="category.events" (cdkDropListDropped)="drop($event)"> 
+                    <mat-card *ngFor="let event of category.events" class="event-card" cdkDrag>
+                        <mat-card-title style="padding-top:10px">
+                            {{event.name}}
+                        </mat-card-title>
+                        <mat-card-content>
+                            <b>{{event.date | date}}</b> <br/>
+                            {{event.description}}
+                        </mat-card-content>
+                    </mat-card>
+            </mat-card-content>
+        </mat-card>
+    </div>
+
+</div>
+<ng-template #loading>
+    <p>Loading...</p>
+</ng-template>
